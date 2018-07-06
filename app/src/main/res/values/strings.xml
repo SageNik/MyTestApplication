@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyTest Application</string>
+    <string name="tab_text_1">My Posts</string>
+    <string name="tab_text_2">Internet Posts</string>
+    <string name="action_settings">Settings</string>
+    <string name="btnSave">Save</string>
+    <string name="btnDelete">Delete</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="lblPostTitle">Post Title</string>
+    <string name="lblPostBody">Post Body</string>
+</resources>
