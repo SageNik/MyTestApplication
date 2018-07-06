@@ -22,7 +22,7 @@ class RealmPostRepositoryImpl : PostRepository{
     override fun save(post: Post): Post? {
         var savedPost: Post? = null
         realm.executeTransaction{realm ->
-            val maxId: Number? = realm.where<Post>().findAll().max("id")
+            val maxId: Number? = realm.where<Post>().max("id")
             var nextId: Long = 1
             if(maxId != null) nextId = 1+ maxId.toLong()
             post.setId(nextId)
