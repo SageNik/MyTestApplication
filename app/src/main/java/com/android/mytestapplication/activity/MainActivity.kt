@@ -10,11 +10,21 @@ import com.android.mytestapplication.R
 import com.android.mytestapplication.constants.Constants.INTERNET_POSTS_SERVER_URL
 import com.android.mytestapplication.service.impl.PostServiceImpl
 
+/**
+ * Activity for loading layout resources
+ *
+ * This is main activity is used to display main functionality of application
+ */
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener{
 
+    /**
+     * ViewPager use for display content from adapter
+     */
     private var viewPager: ViewPager? = null
+    /**
+     * TabLayout use for display and manage tabs
+     */
     private var tabLayout: TabLayout? = null
-    private var postService = PostServiceImpl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +44,8 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener{
 
         setSupportActionBar(toolbar)
     }
+
+    // override behavior for several actions with tabs
         override fun onTabReselected(tab: TabLayout.Tab?) {
             viewPager?.currentItem = tab?.position!!
         }

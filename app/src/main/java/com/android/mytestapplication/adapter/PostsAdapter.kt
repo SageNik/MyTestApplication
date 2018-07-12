@@ -11,7 +11,21 @@ import com.android.mytestapplication.R
 import com.android.mytestapplication.model.Post
 import io.realm.RealmResults
 
-class PostsAdapter(internal var context: Context?, internal val posts: RealmResults<Post>) : ArrayAdapter<Post>(context,R.layout.row, posts) {
+/**
+ * Adapter for preparing data for view
+ *
+ * This is adapter is used for view Post data
+ */
+class PostsAdapter(context: Context?, posts: RealmResults<Post>) : ArrayAdapter<Post>(context,R.layout.row, posts) {
+
+    /**
+     * ArrayAdapter<Post>  use for store Post models
+     */
+    internal val posts = posts
+    /**
+     * Context this is a context application
+     */
+    internal var context = context
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -22,6 +36,7 @@ class PostsAdapter(internal var context: Context?, internal val posts: RealmResu
          val postContentView = rowView.findViewById<TextView>(R.id.textPostContent)
          val postIdView = rowView.findViewById<TextView>(R.id.textPostId)
 
+        // set values to fields
         postTitleView.text = posts[position]?.getTitle()
         postContentView.text = posts[position]?.getBody()
         postIdView.text = posts[position]?.getId().toString()

@@ -7,7 +7,17 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import com.android.mytestapplication.fragment.InternetPosts
 import com.android.mytestapplication.fragment.MyPosts
 
-class Pager(fm: FragmentManager, private val tabCount: Int) : FragmentStatePagerAdapter(fm) {
+/**
+ * Adapter for preparing data for view
+ *
+ * This is adapter is used for get right Fragment for view
+ */
+class Pager(fm: FragmentManager, tabCount: Int) : FragmentStatePagerAdapter(fm) {
+
+    /**
+     * Int tab count use for store current tab count
+     */
+    private val tabCount = tabCount
 
     override fun getItem(position: Int): Fragment {
 

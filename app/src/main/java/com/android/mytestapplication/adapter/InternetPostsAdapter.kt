@@ -11,8 +11,21 @@ import com.android.mytestapplication.R
 import com.android.mytestapplication.model.InternetPost
 import io.realm.RealmResults
 
-class InternetPostsAdapter(internal var context: Context?, internal val posts: RealmResults<InternetPost>) : ArrayAdapter<InternetPost>(context,R.layout.row, posts) {
+/**
+ * Adapter for preparing data for view
+ *
+ * This is adapter is used for view InternetPost data
+ */
+class InternetPostsAdapter(context: Context?, posts: RealmResults<InternetPost>) : ArrayAdapter<InternetPost>(context,R.layout.row, posts) {
 
+    /**
+     * ArrayAdapter<Post>  use for store InternetPost models
+     */
+    internal val posts = posts
+    /**
+     * Context this is a context application
+     */
+    internal var context = context
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -22,6 +35,7 @@ class InternetPostsAdapter(internal var context: Context?, internal val posts: R
         val postContentView = rowView.findViewById<TextView>(R.id.textPostContent)
         val postIdView = rowView.findViewById<TextView>(R.id.textPostId)
 
+        // set values to fields
         postTitleView.text = posts[position]?.getTitle()
         postContentView.text = posts[position]?.getBody()
         postIdView.text = posts[position]?.getId().toString()

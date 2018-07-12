@@ -17,9 +17,16 @@ import com.android.mytestapplication.constants.Constants
 import com.android.mytestapplication.model.Post
 import com.android.mytestapplication.service.impl.PostServiceImpl
 import com.android.mytestapplication.service.interfaces.PostService
-
+/**
+ * Fragment for loading layout resources
+ *
+ * This is Fragment is used for load need data for view  of Posts
+ */
 class MyPosts : Fragment(), Constants {
 
+    /**
+     * PostService use for apply service methods
+     */
     private var postService: PostService = PostServiceImpl()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,7 +48,8 @@ class MyPosts : Fragment(), Constants {
 
     private fun setFabOnClickListener(fab: FloatingActionButton, intent: Intent) {
         fab.setOnClickListener { view ->
-            intent?.apply {
+            intent.apply {
+                //put parameters for the PostActivity
                 putExtra(Constants.SELECTED_POST_TITLE, "")
                 putExtra(Constants.SELECTED_POST_BODY, "")
                 putExtra(Constants.SELECTED_POST_ID, "")
@@ -54,6 +62,7 @@ class MyPosts : Fragment(), Constants {
         listView?.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position) as Post
             intent?.apply {
+                //put parameters for the PostActivity
                 putExtra(Constants.SELECTED_POST_TITLE, selectedItem.getTitle())
                 putExtra(Constants.SELECTED_POST_BODY, selectedItem.getBody())
                 putExtra(Constants.SELECTED_POST_ID, selectedItem.getId().toString())

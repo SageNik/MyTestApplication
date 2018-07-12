@@ -17,35 +17,4 @@ class InternetPostServiceImpl: InternetPostService {
     override fun findAllInternetPosts(): RealmResults<InternetPost> {
         return internetPostRepository.findAllInternetPosts()
     }
-
-//       var connection: URLConnection
-//       var reader: BufferedReader
-//       var url: URL = URL(URL)
-//       var obj: JSONArray = JSONArray()
-//
-//       try {
-//           var newThred = Thread(Runnable { kotlin.run {
-//           connection = url.openConnection()
-//           val inputStream = connection.getInputStream()
-//               val inputStreamReader = InputStreamReader(inputStream)
-//           reader = BufferedReader(inputStreamReader)
-//           val stringBuffer: StringBuffer = StringBuffer()
-//           var line: String? = null
-//           line = reader.readLine()
-//           while(line != null){
-//               stringBuffer.append(line)
-//               line = reader.readLine()
-//           }
-//           obj = JSONArray(stringBuffer.toString())
-//               postRepository.saveAllFromServer(obj)
-//       } })
-//           newThred.start()
-//
-//       }catch (ex: Exception){
-//           return JSONArray()
-//       }
-//       return JSONArray()
-//   }
-//
-//   }
 }

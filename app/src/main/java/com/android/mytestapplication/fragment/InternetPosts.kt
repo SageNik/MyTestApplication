@@ -24,11 +24,24 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 
+/**
+ * Fragment for loading layout resources
+ *
+ * This is Fragment is used for load need data for view  of InternetPosts
+ */
 class InternetPosts : Fragment() {
 
+    /**
+     * InternetPostService use for apply service methods
+     */
     private val internetPostService = InternetPostServiceImpl()
+    /**
+     * InternetPostView use for create current view
+     */
     private var internetPostsView: View? = null
-    private var adapter: InternetPostsAdapter? = null
+    /**
+     * ListView  use for view list of InternetPost
+     */
     private var listView: ListView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,22 +62,23 @@ class InternetPosts : Fragment() {
 
     private fun getAllInternetPosts(){
 
-        val progresBar = internetPostsView?.findViewById<ProgressBar>(R.id.progressBar)
-        progresBar?.visibility = View.VISIBLE
+        val progressBar = internetPostsView?.findViewById<ProgressBar>(R.id.progressBar)
+        progressBar?.visibility = View.VISIBLE
 
         val stringRequest = JsonArrayRequest( Request.Method.GET, Constants.INTERNET_POSTS_SERVER_URL,null,
                 Response.Listener<JSONArray> { response ->
 
                     if(internetPostService.downloadInternetPostsFromServer(response)){
-                        adapter= InternetPostsAdapter(context, internetPostService.findAllInternetPosts() )
+                        val adapter= InternetPostsAdapter(context, internetPostService.findAllInternetPosts() )
                         listView?.adapter = adapter
-                        progresBar?.visibility = View.INVISIBLE
+                        progressBar?.visibility = View.INVISIBLE
                     }
 
                 }, Response.ErrorListener {
             Toast.makeText(context, "Fault connect to server!", Toast.LENGTH_SHORT).show()
         })
 
+        // add current query to request queue and apply it
         val requestQueue = Volley.newRequestQueue(context?.applicationContext)
         requestQueue.add(stringRequest)
         requestQueue.start()
@@ -74,6 +88,7 @@ class InternetPosts : Fragment() {
         listView?.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position) as InternetPost
             intent?.apply {
+                //put parameters for the InternetPostActivity
                 putExtra(Constants.SELECTED_POST_TITLE, selectedItem.getTitle())
                 putExtra(Constants.SELECTED_POST_BODY, selectedItem.getBody())
                 putExtra(Constants.SELECTED_POST_ID, selectedItem.getId().toString())
